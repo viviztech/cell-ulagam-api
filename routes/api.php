@@ -21,6 +21,15 @@ use App\Http\Controllers\Api\V1\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('v1')->group(function () {
+    // Health check endpoint (public)
+    Route::get('/health', function () {
+        return response()->json([
+            'status' => 'ok',
+            'timestamp' => now()->toIso8601String(),
+            'version' => '1.0.0',
+        ]);
+    });
+
     // Public routes
     Route::post('/auth/login', [AuthController::class, 'login']);
 
