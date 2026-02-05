@@ -93,8 +93,8 @@ Route::prefix('v1')->group(function () {
         Route::get('/products/{product}', [ProductController::class, 'show']);
         Route::get('/imeis/search', [ProductImeiController::class, 'search']);
         Route::get('/imeis/available', [ProductImeiController::class, 'available']);
-        Route::apiResource('customers', CustomerController::class);
         Route::get('/customers/search', [CustomerController::class, 'search']);
+        Route::apiResource('customers', CustomerController::class);
         Route::get('/sales', [SaleController::class, 'index']);
         Route::post('/sales', [SaleController::class, 'store']);
         Route::get('/sales/today', [SaleController::class, 'today']);
