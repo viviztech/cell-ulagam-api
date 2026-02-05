@@ -1,0 +1,53 @@
+<?php
+
+namespace App\Models;
+
+use App\Traits\BelongsToShop;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
+class SaleItem extends Model
+{
+    use BelongsToShop, HasFactory;
+
+    protected $fillable = [
+        'shop_id',
+        'sale_id',
+        'product_id',
+        'product_imei_id',
+        'product_name',
+        'product_brand',
+        'product_variant',
+        'quantity',
+        'unit_price',
+        'purchase_price',
+        'discount',
+        'total_price',
+    ];
+
+    protected function casts(): array
+    {
+        return [
+            'unit_price' => 'decimal:2',
+            'purchase_price' => 'decimal:2',
+            'discount' => 'decimal:2',
+            'total_price' => 'decimal:2',
+        ];
+    }
+
+    public function sale(): BelongsTo
+    {
+        return $this->belongsTo(Sale::class);
+    }
+
+    public function product(): BelongsTo
+    {
+        return $this->belongsTo(Product::class);
+    }
+
+    public function productImei(): BelongsTo
+    {
+        return $this->belongsTo(ProductImei::class);
+    }
+}
